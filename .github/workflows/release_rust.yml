@@ -3,7 +3,7 @@ on:
     branches:
       - main
       
-  build-win:
+  build:
     runs-on: windows-latest
 
     steps:
