@@ -30,7 +30,7 @@ fn main() {
             Ordering::Less => println!("Votre supposition est inférieure au nombre secret !"),
             Ordering::Greater => println!("Votre supposition est supérieure au nombre secret !"),
             Ordering::Equal => {
-                println!("Vous avez gagné !");
+                println!("Vous avez gagné en {} essais !", 8-nb_essai);
                 break;
             }
         }
