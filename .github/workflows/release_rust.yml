@@ -2,28 +2,28 @@ on:
   push:
     branches:
       - main
-jobs:   
+
+          
+name: Cross-compile
+
+jobs:
   build:
-    runs-on: windows-latest
-
+    name: Build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        target:
+          - armv7-unknown-linux-gnueabihf
+          - powerpc64-unknown-linux-gnu
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Install latest rust toolchain
-        uses: actions-rs/toolchain@v1
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-          default: true
+          target: ${{ matrix.target }}
           override: true
-
-      - name: Build
-        run: cargo build --all --release 
-
-      - name: Release
-        uses: actions-rs-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
+      - uses: actions-rs/cargo@v1
         with:
-          files: D:/a/jeu_du_plus_ou_du_moins/jeu_du_plus_ou_du_moins.exe
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          use-cross: true
+          command: build
+          args: --release --target=${{ matrix.target }}
