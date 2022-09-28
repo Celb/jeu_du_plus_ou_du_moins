@@ -24,6 +24,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: target/release/jeu_du_plus_ou_du_moins.exe
+          files: D:/a/jeu_du_plus_ou_du_moins/jeu_du_plus_ou_du_moins/target/release/jeu_du_plus_ou_du_moins.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
